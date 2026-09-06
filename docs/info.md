@@ -10,20 +10,55 @@ You can also include images in this folder and reference them in the markdown. E
 ## How it works
 
 This is an 8-bit differential Successive Approximation Register (SAR) ADC
-intended to be the core of a Noise Shaping SAR ADC.
+intended to serve as the SAR core of a Noise-Shaping SAR (NS-SAR) ADC.
 
-The design output rate is 8kHz. The conversion requires 12 clock cycles per conversion. The digital
-controller was designed with the timing and operation of the intended
-noise-shaping SAR (NS-SAR) architecture in mind, and area has been
-allocated for the future integration of the noise-shaping circuitry.
-However, the noise-shaping loop is not included in this version of the
-fabricated core.
+The ADC uses a differential capacitive DAC (CDAC), a dynamic comparator,
+and a dedicated digital SAR controller. The differential architecture
+provides direct conversion of the difference between the two input
+signals while allowing the common-mode voltage to be independently
+defined.
 
-The CDAC was designed with Dynamic Element Matching (DEM) capability in
-mind, but DEM is not enabled in this version. This allows the basic SAR
-core functionality to be verified independently before integrating the
-noise-shaping and DEM features.
+The conversion is performed using a charge-redistribution CDAC and
+successive-approximation algorithm. The CDAC uses bottom-plate switching
+with dedicated common-mode switching. A common-mode voltage of 0.9 V is
+used, with a differential reference range defined by VREF_P = 1.8 V and
+VREF_N = 0 V.
 
+The SAR controller was deliberately designed with the timing sequence of
+the intended NS-SAR architecture in mind. The controller provides the
+required phases for sampling, comparator operation and successive
+approximation, while allowing additional phases required by the future
+noise-shaping loop to be incorporated. The fabricated implementation
+requires 12 clock cycles for each conversion, resulting in an 8 kS/s
+output rate from the 96 kHz input clock.
+
+The CDAC architecture was also designed with Dynamic Element Matching
+(DEM) in mind. However, DEM is not enabled in the fabricated version.
+This was an intentional design choice to first verify the fundamental
+SAR conversion path independently of the additional DEM and
+noise-shaping circuitry.
+
+The present chip therefore implements the fundamental 8-bit SAR
+conversion core. The noise-shaping loop and DEM circuitry are reserved
+for the subsequent NS-SAR implementation, with physical area also
+allocated to facilitate their future integration.
+
+### Design specifications
+
+- **Architecture:** Differential SAR ADC
+- **Resolution:** 8 bits
+- **Input:** Differential
+- **Conversion clock:** 96 kHz
+- **Conversion cycles:** 12 clock cycles/conversion
+- **Output data rate:** 8 kS/s
+- **Positive reference:** 1.8 V
+- **Negative reference:** 0 V
+- **Common-mode voltage:** 0.9 V
+- **Bias current:** 5 µA
+- **CDAC:** Capacitive charge-redistribution DAC
+- **DEM:** Designed for future integration, not enabled
+- **Noise shaping:** Not included in fabricated version
+- **Intended architecture:** Core SAR stage of an NS-SAR ADC
 ## How to test
 
 Connect the differential analog inputs `V_P` and `V_N` within the
