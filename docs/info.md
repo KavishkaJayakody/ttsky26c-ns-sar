@@ -45,7 +45,7 @@ allocated to facilitate their future integration.
 
 ### Design specifications
 
-- **Architecture:** Differential SAR ADC
+- **Architecture:** Fully Differential Conventional Switching SAR
 - **Resolution:** 8 bits
 - **Input:** Differential
 - **Conversion clock:** 96 kHz
@@ -54,6 +54,8 @@ allocated to facilitate their future integration.
 - **Positive reference:** 1.8 V
 - **Negative reference:** 0 V
 - **Common-mode voltage:** 0.9 V
+- **Target DNL:** ±0.5 LSB
+- **Target INL:** ±1 LSB
 - **Bias current:** 5 µA
 - **CDAC:** Capacitive charge-redistribution DAC
 - **DEM:** Designed for future integration, not enabled
