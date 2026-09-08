@@ -2,7 +2,7 @@
 
 # NS-SAR ADC — 8-bit Differential SAR Core
 
-**Tiny Tapeout analog submission (shuttle `ttsky26c`, SKY130, 2×2 analog tiles)**
+**Tiny Tapeout analog and digital submission (shuttle `ttsky26c`, SKY130, 2×2 analog tiles)**
 
 > ### Submission status: intermediate design
 >
